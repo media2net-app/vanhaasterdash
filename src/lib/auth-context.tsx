@@ -61,12 +61,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setTimeout(() => {
         // Demo login - in real app this would be an API call
         console.log('Checking credentials:', credentials);
-        if (credentials.email === 'demo@vanhaaster.nl' && credentials.password === 'SdfnjSDF432!') {
+        if (credentials.email === 'ron.stoel@vanhaaster.nl' && credentials.password === 'SdfnjSDF432!') {
           console.log('Credentials match! Creating user...');
           const user: User = {
             id: '1',
             email: credentials.email,
-            name: 'Demo Gebruiker',
+            name: 'Ron Stoel',
           };
 
           localStorage.setItem('user', JSON.stringify(user));

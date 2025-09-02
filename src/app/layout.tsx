@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "VanHaaster Dashboard",
+      title: "Vanhaaster dashboard",
   description: "A simple login dashboard built with Next.js",
 };
 

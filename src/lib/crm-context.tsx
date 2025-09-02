@@ -42,8 +42,8 @@ export const useCRM = () => {
 const demoTeamMembers: TeamMember[] = [
   {
     id: '1',
-    name: 'Jan van der Berg',
-    email: 'jan@vanhaaster.nl',
+    name: 'Ron Stoel',
+    email: 'ron.stoel@vanhaaster.nl',
     department: Department.BUITENDIENST,
     role: 'Account Manager',
     phone: '0528 348450'
@@ -123,7 +123,7 @@ const demoProjects: Project[] = [
   {
     id: '2',
     customerId: '2',
-    name: 'Educatieve Bebording',
+            name: 'Educatieve bebording',
     description: 'Gethematiseerde signing voor het park',
     type: ProjectType.SIGNAGE,
     status: ProjectStatus.IN_PROGRESS,

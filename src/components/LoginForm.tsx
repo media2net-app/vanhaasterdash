@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
 
 export const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState('demo@vanhaaster.nl');
+  const [email, setEmail] = useState('ron.stoel@vanhaaster.nl');
   const [password, setPassword] = useState('SdfnjSDF432!');
   const [error, setError] = useState('');
   const { login, isLoading } = useAuth();
@@ -23,33 +23,24 @@ export const LoginForm: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-[#111111] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div>
-          <div className="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-gray-700">
-            <svg
-              className="h-8 w-8 text-white"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
-              />
-            </svg>
+          <div className="mx-auto flex items-center justify-center">
+            <img
+              src="/Vanhaaster-logo-wit-formatted.png.webp"
+              alt="Vanhaaster Logo"
+              className="w-48 h-auto max-w-full"
+            />
           </div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-            Vanhaaster Dashboard
+            Vanhaaster dashboard
           </h2>
-          <h3 className="mt-2 text-center text-xl font-medium text-gray-300">
+          <h3 className="mt-2 text-center text-xl font-medium text-[#E2017A]">
             Log in op je account
           </h3>
-          <p className="mt-2 text-center text-sm text-gray-400">
-            Demo credentials zijn automatisch ingevuld
+          <p className="mt-2 text-center text-sm text-[#E2017A]/70">
+            Ron Stoel credentials zijn automatisch ingevuld
           </p>
         </div>
         
@@ -65,7 +56,7 @@ export const LoginForm: React.FC = () => {
                 type="email"
                 autoComplete="email"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-600 placeholder-gray-400 text-white bg-gray-800 rounded-t-md focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-[#E2017A]/50 placeholder-[#E2017A]/50 text-white bg-[#111111] rounded-t-md focus:outline-none focus:ring-[#E2017A] focus:border-[#E2017A] focus:z-10 sm:text-sm"
                 placeholder="E-mailadres"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -81,7 +72,7 @@ export const LoginForm: React.FC = () => {
                 type="password"
                 autoComplete="current-password"
                 required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-600 placeholder-gray-400 text-white bg-gray-800 rounded-b-md focus:outline-none focus:ring-gray-500 focus:border-gray-500 focus:z-10 sm:text-sm"
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-[#E2017A]/50 placeholder-[#E2017A]/50 text-white bg-[#111111] rounded-b-md focus:outline-none focus:ring-gray-500 focus:border-[#E2017A] focus:z-10 sm:text-sm"
                 placeholder="Wachtwoord"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -90,11 +81,11 @@ export const LoginForm: React.FC = () => {
           </div>
 
           {error && (
-            <div className="rounded-md bg-red-900/50 p-4 border border-red-700">
+            <div className="rounded-md bg-[#E2017A]/20 p-4 border border-[#E2017A]/50">
               <div className="flex">
                 <div className="flex-shrink-0">
                   <svg
-                    className="h-5 w-5 text-red-400"
+                    className="h-5 w-5 text-[#E2017A]"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >
@@ -106,7 +97,7 @@ export const LoginForm: React.FC = () => {
                   </svg>
                 </div>
                 <div className="ml-3">
-                  <h3 className="text-sm font-medium text-red-300">
+                  <h3 className="text-sm font-medium text-[#E2017A]">
                     {error === 'Invalid email or password' ? 'Ongeldig e-mailadres of wachtwoord' : error}
                   </h3>
                 </div>
@@ -118,7 +109,7 @@ export const LoginForm: React.FC = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-700 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
+              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#E2017A] hover:bg-[#E2017A]/80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#E2017A] disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200"
             >
               {isLoading ? (
                 <div className="flex items-center">

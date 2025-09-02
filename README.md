@@ -34,7 +34,7 @@ src/
 
 Voor het testen van de login functionaliteit:
 
-- **Email:** `demo@vanhaaster.nl`
+- **Email:** `ron.stoel@vanhaaster.nl`
 - **Password:** `SdfnjSDF432!`
 
 ## Installatie
