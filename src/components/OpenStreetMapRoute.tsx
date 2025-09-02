@@ -19,6 +19,8 @@ interface RouteLocation {
 export const OpenStreetMapRoute: React.FC<OpenStreetMapRouteProps> = ({ className = '' }) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
+  const [mapLoading, setMapLoading] = useState(true);
+  const [mapError, setMapError] = useState<string | null>(null);
 
   const routeData: RouteLocation[] = [
     {
@@ -71,11 +73,34 @@ export const OpenStreetMapRoute: React.FC<OpenStreetMapRouteProps> = ({ classNam
   useEffect(() => {
     if (!mapRef.current) return;
 
+    setMapLoading(true);
+    setMapError(null);
+
     const initMap = async () => {
       try {
+        // First, ensure Leaflet CSS is loaded
+        if (!document.querySelector('link[href*="leaflet"]')) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
+          link.crossOrigin = '';
+          document.head.appendChild(link);
+          
+          // Wait for CSS to load
+          await new Promise((resolve) => {
+            link.onload = resolve;
+            link.onerror = resolve; // Continue even if CSS fails
+          });
+        }
+
         // Dynamically import Leaflet
         const L = await import('leaflet');
         
+        // Clear any existing content
+        if (mapRef.current) {
+          mapRef.current.innerHTML = '';
+        }
+
         // Initialize map
         const map = L.map(mapRef.current!).setView([52.7225, 6.4764], 10);
         setMapInstance(map);
@@ -160,14 +185,20 @@ export const OpenStreetMapRoute: React.FC<OpenStreetMapRouteProps> = ({ classNam
 
         // Fit map to show entire route
         map.fitBounds(routeLine.getBounds(), { padding: [20, 20] });
+
+        setMapLoading(false);
       } catch (error) {
         console.error('Error loading OpenStreetMap:', error);
+        setMapError('Er is een fout opgetreden bij het laden van de kaart');
+        setMapLoading(false);
       }
     };
 
-    initMap();
+    // Small delay to ensure DOM is ready
+    const timer = setTimeout(initMap, 100);
 
     return () => {
+      clearTimeout(timer);
       if (mapInstance) {
         mapInstance.remove();
       }
@@ -215,8 +246,33 @@ export const OpenStreetMapRoute: React.FC<OpenStreetMapRouteProps> = ({ classNam
         {/* Map */}
         <div 
           ref={mapRef} 
-          className="w-full h-96 rounded-lg border border-gray-700"
-        />
+          className="w-full h-96 rounded-lg border border-gray-700 relative"
+        >
+          {mapLoading && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-800 rounded-lg">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#E2017A] mx-auto mb-4"></div>
+                <div className="text-[#E2017A] text-lg font-medium mb-2">Kaart laden...</div>
+                <div className="text-gray-400 text-sm">OpenStreetMap wordt geladen</div>
+              </div>
+            </div>
+          )}
+          
+          {mapError && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-800 rounded-lg">
+              <div className="text-center">
+                <div className="text-red-400 text-lg font-medium mb-2">Fout bij laden kaart</div>
+                <div className="text-gray-400 text-sm mb-4">{mapError}</div>
+                <button 
+                  onClick={() => window.location.reload()} 
+                  className="bg-[#E2017A] hover:bg-[#E2017A]/80 text-white px-4 py-2 rounded-md text-sm"
+                >
+                  Opnieuw proberen
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* Route Summary */}
         <div className="mt-4 pt-4 border-t border-gray-700">
