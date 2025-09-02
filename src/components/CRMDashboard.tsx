@@ -13,7 +13,7 @@ export const CRMDashboard: React.FC = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [activeTab, setActiveTab] = useState('overview');
   const [showAddCustomerModal, setShowAddCustomerModal] = useState(false);
-  const [editingCustomer, setEditingCustomer] = useState<any>(null);
+  const [editingCustomer, setEditingCustomer] = useState<{ id: number; name: string; email: string; status: CustomerStatus } | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
   // Sample data
